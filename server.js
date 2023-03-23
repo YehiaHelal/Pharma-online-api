@@ -23,13 +23,11 @@ app.use((req, res, next) => {
 });
 
 app.use(cookieParser()); // To parse the incoming cookies
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-  })
-);
-
+app.use(cors());
+// {
+//   origin: "*",
+//   credentials: true,
+// }
 // // routes
 app.use("/api/users", authRoutes); // for users
 app.use("/api/items", itemsRoutes); // for items
