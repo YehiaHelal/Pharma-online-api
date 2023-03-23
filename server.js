@@ -23,32 +23,46 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  // another common pattern
-  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-  );
+  // res.setHeader("Access-Control-Allow-Credentials", true);
+  // res.setHeader("Access-Control-Allow-Origin", "*");
+  // // another common pattern
+  // // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  // res.setHeader(
+  //   "Access-Control-Allow-Methods",
+  //   "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  // );
+  // res.setHeader(
+  //   "Access-Control-Allow-Headers",
+  //   "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+  // );
   next();
 });
 
 app.use(cookieParser()); // To parse the incoming cookies
 app.use(
-  cors({
-    origin: "*",
-    credentials: true,
+  cors(
+    {
+      credentials: true,
+      origin: "*",
+      headers: {
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+        "Access-Control-Allow-Headers":
+          "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+      },
+
+      // headers: {
+      //   "Access-Control-Allow-Origin": "*",
+      //   "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      // },
+    }
+
     // headers: {
-    //   //     "Access-Control-Allow-Origin": "*",
-    //   //     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    //   //   },
+    //   "Access-Control-Allow-Origin": "*",
+    //   "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     // },
-  })
+  )
   //   {
   //   origin: "https://pharma-online-frontend-production.up.railway.app",
   //   credentials: true,
