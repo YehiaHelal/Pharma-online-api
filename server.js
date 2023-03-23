@@ -24,14 +24,15 @@ app.use((req, res, next) => {
 
 app.use(cookieParser()); // To parse the incoming cookies
 app.use(
-  cors({
-    origin: "https://pharma-online-frontend-production.up.railway.app",
-    credentials: true,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    },
-  })
+  cors()
+  //   {
+  //   origin: "https://pharma-online-frontend-production.up.railway.app",
+  //   credentials: true,
+  //   headers: {
+  //     "Access-Control-Allow-Origin": "*",
+  //     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  //   },
+  // }
 );
 
 // // routes
