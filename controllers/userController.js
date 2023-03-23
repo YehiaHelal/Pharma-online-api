@@ -49,7 +49,7 @@ const createUser_post = async (req, res) => {
     // after we send a jwt token for the browser-frontend
     res.status(200).json({ message: "user created" });
   } catch (error) {
-    res.status(400).json({ error: error });
+    res.status(400).json({ error: "please fill in all the fields" });
   }
 };
 
