@@ -43,7 +43,7 @@ app.use(
   cors(
     {
       credentials: true,
-      origin: "*",
+      origin: "https://pharma-online-frontend-production.up.railway.app",
       headers: {
         "Access-Control-Allow-Credentials": "true",
         "Access-Control-Allow-Origin": "*",
