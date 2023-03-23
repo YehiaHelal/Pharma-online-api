@@ -40,7 +40,12 @@ app.use(
     origin: "https://pharma-online-frontend-production.up.railway.app",
     "Access-Control-Allow-Origin": "*",
 
-    // credentials: true,
+    credentials: true,
+    headers: {
+      //     "Access-Control-Allow-Origin": "*",
+      //     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      //   },
+    },
   })
   //   {
   //   origin: "https://pharma-online-frontend-production.up.railway.app",
