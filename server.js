@@ -44,13 +44,13 @@ app.use(
     {
       credentials: true,
       origin: "https://pharma-online-frontend-production.up.railway.app",
-      headers: {
-        "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-        "Access-Control-Allow-Headers":
-          "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-      },
+      // headers: {
+      //   "Access-Control-Allow-Credentials": "true",
+      //   "Access-Control-Allow-Origin": "*",
+      //   "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+      //   "Access-Control-Allow-Headers":
+      //     "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+      // },
 
       // headers: {
       //   "Access-Control-Allow-Origin": "*",
