@@ -23,11 +23,17 @@ app.use((req, res, next) => {
 });
 
 app.use(cookieParser()); // To parse the incoming cookies
-app.use(cors());
-// {
-//   origin: "*",
-//   credentials: true,
-// }
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  })
+);
+
 // // routes
 app.use("/api/users", authRoutes); // for users
 app.use("/api/items", itemsRoutes); // for items
