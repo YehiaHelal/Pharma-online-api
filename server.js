@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 app.use(cookieParser()); // To parse the incoming cookies
 app.use(
   cors({
-    origin: "https://pharma-online-frontend-production.up.railway.app",
+    origin: "*",
     "Access-Control-Allow-Origin": "*",
 
     credentials: true,
