@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 
 app.use((req, res, next) => {
-  res.set("Access-Control-Allow-Origin", "*");
+  // res.set("Access-Control-Allow-Origin", "*");
   console.log(req.path, req.method);
   next();
 });
@@ -25,6 +25,7 @@ app.use((req, res, next) => {
 app.use(cookieParser()); // To parse the incoming cookies
 app.use(
   cors({
+    origin: "*",
     credentials: true,
   })
 );
