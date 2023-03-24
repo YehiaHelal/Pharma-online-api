@@ -1,29 +1,40 @@
 const express = require("express");
-const {
-  getItem,
-  getItems,
-  createItem,
-  deleteItem,
-  updateItem,
-} = require("./../controllers/itemController");
+const itemController = require("./../controllers/itemController");
 const authController = require("./../controllers/authController");
 const userController = require("./../controllers/userController");
 
 const router = express.Router();
 
 // GET all Items
-router.get("/", getItems);
+router.get("/", itemController.getItems);
 
 //GET a single Item
-router.get("/:id", getItem);
+router.get("/:id", itemController.getItem);
 
-// POST a new Item
-router.post("/", createItem);
+// for admin  //
 
-// DELETE a Item
-router.delete("/:id", deleteItem);
+// add a new Item
+router.post(
+  "/",
+  authController.requireAuth,
+  authController.restrictTo,
+  itemController.createItem_post
+);
 
-// UPDATE a Item
-router.patch("/:id", updateItem);
+// delete a Item
+router.delete(
+  "/:id",
+  authController.requireAuth,
+  authController.restrictTo,
+  itemController.deleteItem_post
+);
+
+// update a Item
+router.patch(
+  "/:id",
+  authController.requireAuth,
+  authController.restrictTo,
+  itemController.updateItem_post
+);
 
 module.exports = router;

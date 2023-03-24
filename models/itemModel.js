@@ -9,6 +9,7 @@ const itemSchema = new Schema(
     image: { type: String },
     summary: { type: String },
     description: { type: String },
+    numberofitem: { type: Number },
   },
   { timestamps: true }
 );

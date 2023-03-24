@@ -16,6 +16,12 @@ const createUser_post = async (req, res) => {
   // name
   // here we are using de-structing assigning name and email and password to , from the request body we got.
 
+  if (password.lenth < 6) {
+    return res
+      .status(400)
+      .json({ error: "Minimum password length is 6 characters", emptyFields });
+  }
+
   let emptyFields = [];
 
   // if (!name) {
@@ -35,6 +41,11 @@ const createUser_post = async (req, res) => {
     return res
       .status(400)
       .json({ error: "please fill in all the fields", emptyFields });
+  }
+
+  const checkIfUserExist = await User.findOne({ email });
+  if (checkIfUserExist) {
+    return res.status(400).json({ error: "there is an existing user" });
   }
 
   try {
@@ -66,7 +77,7 @@ const loginUser_post = async (req, res) => {
   if (user) {
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) {
-      throw res.status(400).json({ error: "incorrect password" });
+      return res.status(400).json({ error: "incorrect password" });
     }
   }
 
@@ -88,22 +99,8 @@ const profileDataGet_post = async (req, res) => {
   // to inside the req itself which is passed to here
   // the req.current , res.locals will be passed to the next middleware so we have them .
 
-  console.log(req.current);
-  console.log(res.locals.user);
-
-  // const { authorization } = req.headers;
-
-  // const token = authorization.split(" ")[1];
-
-  // console.log(token);
-
-  // const { _id } = jwt.verify(token, process.env.SECRET);
-
-  // console.log(_id);
-
-  // req.user = await User.findOne({ _id }).select("_id");
-
-  // console.log(req.user);
+  // console.log(req.current);
+  // console.log(res.locals.user);
 
   res.status(200).json({ user: res.locals.user });
 };
@@ -151,9 +148,21 @@ const updateUser_post = async (req, res) => {
   res.status(200).json({ user: res.locals.user, message: { user } });
 };
 
-// delete a user
+//  for admin    //
 
-const deleteUser = async (req, res) => {
+// get all users
+const getUsers_post = async (req, res) => {
+  const users = await User.find({}).sort({});
+
+  // a normal cookie send
+  // res.cookie("JWT-Test", false, { maxAge: 1000 * 60 * 60 * 24 }); - // setting the age for it to stay even if the browser was closed
+  // 1000 milisecond * 60 sec * 60 minute * 24 hour
+
+  res.status(200).json(users); // res.status 200 means ok
+};
+
+// delete a user
+const deleteUser_post = async (req, res) => {
   const { id } = req.params;
 
   // so avoid  id } = req.params.id ?!
@@ -171,37 +180,23 @@ const deleteUser = async (req, res) => {
   res.status(200).json(user);
 };
 
-//   data   //
-
-// get all users
-
-const getUsers = async (req, res) => {
-  const users = await User.find({}).sort({});
-
-  // a normal cookie send
-  // res.cookie("JWT-Test", false, { maxAge: 1000 * 60 * 60 * 24 }); - // setting the age for it to stay even if the browser was closed
-  // 1000 milisecond * 60 sec * 60 minute * 24 hour
-  res.cookie("users-cookie", true);
-  res.status(200).json(users); // res.status 200 means ok
-};
-
 // get a single user
 
-const getUser = async (req, res) => {
-  const { id } = req.params;
+// const getUser = async (req, res) => {
+//   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such user" });
-  }
+//   if (!mongoose.Types.ObjectId.isValid(id)) {
+//     return res.status(404).json({ error: "No such user" });
+//   }
 
-  const user = await User.findById(id);
+//   const user = await User.findById(id);
 
-  if (!user) {
-    return res.status(404).json({ error: "No such user" });
-  }
-  res.cookie("JWT-Test", true);
-  res.status(200).json(user);
-};
+//   if (!user) {
+//     return res.status(404).json({ error: "No such user" });
+//   }
+//   res.cookie("JWT-Test", true);
+//   res.status(200).json(user);
+// };
 
 module.exports = {
   createUser_post,
@@ -209,7 +204,6 @@ module.exports = {
   profileDataGet_post,
   logoutUser_post,
   updateUser_post,
-  deleteUser,
-  getUser,
-  getUsers,
+  deleteUser_post,
+  getUsers_post,
 };

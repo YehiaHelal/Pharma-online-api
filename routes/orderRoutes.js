@@ -13,6 +13,22 @@ router.post(
   orderController.getuserorders_post
 );
 
+router.post(
+  "/cartorder",
+  authController.requireAuth,
+  orderController.cartOrder_post
+);
+
+// Restricted to admin //
+
+//get all orders
+router.get(
+  "/admin/getallorders",
+  authController.requireAuth,
+  authController.restrictTo,
+  orderController.getOrders_post
+);
+
 // //GET a single order
 // router.get("/:id", getorder);
 
@@ -26,11 +42,5 @@ router.post(
 // router.patch("/:id", updateorder);
 
 // module.exports = router;
-
-router.post(
-  "/cartorder",
-  authController.requireAuth,
-  orderController.cartOrder_post
-);
 
 module.exports = router;

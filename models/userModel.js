@@ -26,6 +26,11 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Please enter your name"],
     },
+    role: {
+      type: String,
+      enum: ["user", "guide", "lead-guide", "admin"],
+      default: "user",
+    },
   },
   { timestamps: true }
 );

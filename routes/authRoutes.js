@@ -24,8 +24,22 @@ router.post(
   userController.updateUser_post
 );
 
-// for admin
-// router.get("", userController.getUsers);
-// router.get("/:id", userController.getUser);
+// Restricted to admin //
+
+//get all users
+router.get(
+  "/admin/getallusers",
+  authController.requireAuth,
+  authController.restrictTo,
+  userController.getUsers_post
+);
+
+//delete user
+router.post(
+  "/admin/getallusers",
+  authController.requireAuth,
+  authController.restrictTo,
+  userController.deleteUser_post
+);
 
 module.exports = router;

@@ -15,9 +15,9 @@ const requireAuth = async (req, res, next) => {
   }
 
   if (!token) {
-    return next(
-      new AppError("You are not logged in! Please log in to get access.", 401)
-    );
+    return res
+      .status(401)
+      .json({ error: "You are not logged in! Please log in to get access." });
   }
 
   // 2) Verification token
@@ -28,12 +28,9 @@ const requireAuth = async (req, res, next) => {
   const currentUser = await User.findById(decoded.id);
   console.log(currentUser);
   if (!currentUser) {
-    return next(
-      new AppError(
-        "The user belonging to this token does no longer exist.",
-        401
-      )
-    );
+    return res
+      .status(401)
+      .json({ error: "You are not logged in! Please log in to get access." });
   }
 
   // return res.status(200).json({ meesage: "u are in all good" });
@@ -41,8 +38,21 @@ const requireAuth = async (req, res, next) => {
   req.user = currentUser;
   res.locals.user = currentUser;
   next();
-
-
 };
 
-module.exports = { requireAuth };
+const restrictTo = async (req, res, next) => {
+  console.log(req.user);
+  console.log(res.locals.user);
+
+  if (req.user.role !== "admin") {
+    return res
+      .status(403)
+      .json({ error: "You do not have permission to perform this action" });
+  }
+
+  console.log("u are permitted");
+
+  next();
+};
+
+module.exports = { requireAuth, restrictTo };

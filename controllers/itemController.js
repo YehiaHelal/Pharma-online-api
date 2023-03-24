@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const getItems = async (req, res) => {
   const items = await Item.find({}).sort({});
 
-  res.cookie("Items", true);
   res.status(200).json(items); // res.status 200 means ok
 };
 
@@ -29,7 +28,7 @@ const getItem = async (req, res) => {
 };
 
 // create new item
-const createItem = async (req, res) => {
+const createItem_post = async (req, res) => {
   const { name, price, image } = req.body;
 
   // here we are using de-structing assigning name and email and password to , from the request body we got.
@@ -62,7 +61,7 @@ const createItem = async (req, res) => {
 
 // delete a item
 
-const deleteItem = async (req, res) => {
+const deleteItem_post = async (req, res) => {
   const { id } = req.params;
 
   // so avoid  id } = req.params.id ?!
@@ -82,7 +81,7 @@ const deleteItem = async (req, res) => {
 
 // update a item
 
-const updateItem = async (req, res) => {
+const updateItem_post = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -101,7 +100,7 @@ const updateItem = async (req, res) => {
 module.exports = {
   getItem,
   getItems,
-  createItem,
-  deleteItem,
-  updateItem,
+  createItem_post,
+  deleteItem_post,
+  updateItem_post,
 };
