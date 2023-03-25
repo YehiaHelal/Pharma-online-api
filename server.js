@@ -13,6 +13,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const compression = require("compression");
 const hpp = require("hpp");
+
 // routes
 const itemsRoutes = require("./routes/itemsRoutes");
 const authRoutes = require("./routes/authRoutes");
@@ -26,7 +27,7 @@ app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 
 app.use((req, res, next) => {
-  console.log(req.path, req.method);
+  // console.log(req.path, req.method);
   next();
 });
 
@@ -34,7 +35,7 @@ app.use(cookieParser()); // To parse the incoming cookies
 app.use(
   cors({
     credentials: true,
-    origin: "https://pharma-online-frontend-production.up.railway.app",
+    origin: "http://localhost:3000",
   })
 );
 

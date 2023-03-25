@@ -120,12 +120,12 @@ const logoutUser_post = async (req, res) => {
 // update user data
 
 const updateUser_post = async (req, res) => {
-  console.log(req.user);
-  console.log(res.locals.user.email);
+  // console.log(req.user);
+  //  console.log(res.locals.user.email);
 
   const { name, address } = req.body.submission;
 
-  console.log(name, address);
+  // console.log(name, address);
 
   const user = await User.findOneAndUpdate(
     { email: res.locals.user.email },
@@ -135,7 +135,7 @@ const updateUser_post = async (req, res) => {
     }
   );
 
-  console.log(user);
+  // console.log(user);
 
   // return res.status(404).json({ error: "No such user" });
 

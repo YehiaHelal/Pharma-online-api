@@ -48,7 +48,7 @@ const createItem_post = async (req, res) => {
   if (emptyFields > 0) {
     return res
       .status(400)
-      .json({ error: "please fill in all the fields", emptyFields });
+      .json({ error: "please send all the needs components", emptyFields });
   }
 
   try {
@@ -73,7 +73,7 @@ const deleteItem_post = async (req, res) => {
   const item = await Item.findOneAndDelete({ _id: id });
 
   if (!item) {
-    return res.status(400).json({ error: "No such workout" });
+    return res.status(400).json({ error: "No such item" });
   }
 
   res.status(200).json(item);

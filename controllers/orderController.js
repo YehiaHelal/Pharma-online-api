@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 // create new user
 const cartOrder_post = async (req, res) => {
-  console.log(req.body.OrderDetails);
+  //  console.log(req.body.OrderDetails);
   const { orderProducts, orderTotalValue, numberofitems } =
     req.body.OrderDetails; // from the req.body sent from the frontend
 
@@ -12,8 +12,8 @@ const cartOrder_post = async (req, res) => {
   // console.log(res.locals.user);
   // console.log(res.locals.user.email);
 
-  console.log(orderProducts);
-  console.log(orderTotalValue);
+  // console.log(orderProducts);
+  // console.log(orderTotalValue);
 
   try {
     const order = await Order.create({
@@ -22,7 +22,7 @@ const cartOrder_post = async (req, res) => {
       user: res.locals.user.email,
       numberofitems,
     });
-    console.log(order);
+    // console.log(order);
 
     // console.log(order);
 
@@ -35,9 +35,9 @@ const cartOrder_post = async (req, res) => {
 // get user orders
 const getuserorders_post = async (req, res) => {
   const userorders = await Order.find({ user: res.locals.user.email });
-  console.log(userorders);
+  // console.log(userorders);
 
-  console.log(res.locals.user.email);
+  //  console.log(res.locals.user.email);
 
   // console.log(req.body.OrderDetails);
   // const { orderProducts, orderTotalValue } = req.body.OrderDetails; // from the req.body sent from the frontend

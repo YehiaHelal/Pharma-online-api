@@ -8,7 +8,10 @@ const router = Router();
 
 // router.get("/signup", ); // to get some info from the backend DB   // we can set the function here or we add the controller for cleaner code
 
-router.post("/signup", userController.createUser_post); // to form/create a doc on the backend DB // we can set the function here or we add the controller for cleaner code
+router.post("/signup", userController.createUser_post); // to form/create a doc on the backend DB // we can set the function here or we add the
+
+router.post("/checktoken", authController.checkToken_post);
+
 router.post("/login", userController.loginUser_post); // to get some info from the backend DB // we can set the function here or we add the controller for cleaner code
 router.post("/logout", userController.logoutUser_post); // posting here we send just an empty cookie with 1sec timer and message logout done
 
