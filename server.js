@@ -35,13 +35,13 @@ app.use(cookieParser()); // To parse the incoming cookies
 app.use(
   cors({
     credentials: true,
-    origin: "https://pharma-online-frontend-production.up.railway.app",
+    origin: "https://sunny-mandazi-9696e0.netlify.app",
   })
 );
 
 ///////////////////////////////////////
 // security  //
-app.use(helmet());
+https: app.use(helmet());
 
 // Limit requests from same API
 const limiter = rateLimit({
