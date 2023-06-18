@@ -35,7 +35,7 @@ app.use(cookieParser()); // To parse the incoming cookies
 app.use(
   cors({
     credentials: true,
-    origin: "https://pharmacyonline.netlify.app",
+    origin: "https://pharma-online-frontend.vercel.app",
   })
 );
 
