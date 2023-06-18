@@ -35,7 +35,7 @@ app.use(cookieParser()); // To parse the incoming cookies
 app.use(
   cors({
     credentials: true,
-    origin: "https://sunny-mandazi-9696e0.netlify.app",
+    origin: "https://pharmacyonline.netlify.app",
   })
 );
 
